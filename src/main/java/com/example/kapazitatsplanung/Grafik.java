@@ -10,11 +10,10 @@ public class Grafik {
     List<Produkte> produkteList = new ArrayList<>();
     HashMap<String, String[]> maschinen = new HashMap<>();
 
+    HashMap<String, Integer> anzahlVonProdukte = new HashMap<>();
+
     public Grafik(){
-        fillMap();
         fillColors();
-
-
     }
 
     public void fillColors(){
@@ -27,12 +26,12 @@ public class Grafik {
         productColors.put("Produkte6", Color.YELLOW);
     }
 
-    public void fillMap(){
-        maschinen.put("Maschine1", new String[8]);
-        maschinen.put("Maschine2", new String[8]);
-        maschinen.put("Maschine3", new String[8]);
-        maschinen.put("Maschine4", new String[8]);
-        maschinen.put("Maschine5", new String[8]);
+    public void fillMap(int days){
+        maschinen.put("Maschine1", new String[days]);
+        maschinen.put("Maschine2", new String[days]);
+        maschinen.put("Maschine3", new String[days]);
+        maschinen.put("Maschine4", new String[days]);
+        maschinen.put("Maschine5", new String[days]);
     }
 
     public void addProduktToMap(Produkte produkte){
@@ -83,6 +82,10 @@ public class Grafik {
 
     }
 
+    public void addToProduktList(Produkte produkte){
+        produkteList.add(produkte);
+    }
+
 
 
     public void drawChart(GraphicsContext gc) {
@@ -120,6 +123,7 @@ public class Grafik {
         process1.put("Maschine1", 1);
         process1.put("Maschine2", 3);
         produkte1.setMap(process1);
+        addToProduktList(produkte1);
         addProduktToMap(produkte1);
 
         Produkte produkte2 = new Produkte("Produkte2");
@@ -127,6 +131,7 @@ public class Grafik {
         process2.put("Maschine4", 2);
         process2.put("Maschine5", 1);
         produkte2.setMap(process2);
+        addToProduktList(produkte2);
         addProduktToMap(produkte2);
         System.out.println("Produkt 2");
         System.out.println("===========================");
@@ -138,6 +143,7 @@ public class Grafik {
         LinkedHashMap<String, Integer> process3 = new LinkedHashMap<>();
         process3.put("Maschine3", 2);
         produkte3.setMap(process3);
+        addToProduktList(produkte3);
         addProduktToMap(produkte3);
 
         System.out.println("Produkt 3");
@@ -150,6 +156,7 @@ public class Grafik {
         process4.put("Maschine1", 2);
         process4.put("Maschine3", 3);
         produkte4.setMap(process4);
+        addToProduktList(produkte4);
         addProduktToMap(produkte4);
 
         System.out.println("Produkt 4");
@@ -162,6 +169,7 @@ public class Grafik {
         process5.put("Maschine2", 1);
         process5.put("Maschine5", 3);
         produkte5.setMap(process5);
+        addToProduktList(produkte5);
         addProduktToMap(produkte5);
 
         System.out.println("Produkt 5");
@@ -174,11 +182,8 @@ public class Grafik {
         process6.put("Maschine3", 1);
         process6.put("Maschine4", 3);
         produkte6.setMap(process6);
+        addToProduktList(produkte6);
         addProduktToMap(produkte6);
-
-
-
-
     }
 
     public void printMap(){
@@ -193,5 +198,6 @@ public class Grafik {
         }
     }
 
+    // Prozess 1 label
 
 }

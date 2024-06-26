@@ -1,6 +1,10 @@
 package com.example.kapazitatsplanung;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,30 +16,120 @@ import java.util.LinkedHashMap;
 
 public class HelloApplication extends Application {
 
+    private ObservableList<Produkte> produkteData = FXCollections.observableArrayList();
+
+
     private Grafik grafik = new Grafik();
 
     public HelloApplication() {
+        createData();
+    }
 
+    public ObservableList<Produkte> getProdukteData() {
+        return this.produkteData;
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Kapazitätsplanung");
+    public void start(Stage stage) {
+//        primaryStage.setTitle("Kapazitätsplanung");
+//
+//        Pane root = new Pane();
+//        Canvas canvas = new Canvas(800, 400);  // Увеличиваем размер холста
+//        GraphicsContext gc = canvas.getGraphicsContext2D();
+//
+//        grafik.drawChart(gc);
+//
+//
+//        root.getChildren().add(canvas);
+//        primaryStage.setScene(new Scene(root));
+//        primaryStage.show();
 
-        Pane root = new Pane();
-        Canvas canvas = new Canvas(800, 400);  // Увеличиваем размер холста
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        try {
 
-        grafik.drawChart(gc);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Grafik.fxml"));
+            Parent root = loader.load();
+            GrafikController controller = loader.getController();
+            controller.setMainApp(this);
 
 
-        root.getChildren().add(canvas);
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+            Scene scene = new Scene(root);
+
+
+            stage.setTitle("База данных 'Unwetter'");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void createData(){
+
+        Produkte produkte1 = new Produkte("Produkte1");
+        LinkedHashMap<String, Integer> process1 = new LinkedHashMap<>();
+        process1.put("Maschine1", 1);
+        process1.put("Maschine2", 3);
+        produkte1.setMap(process1);
+        grafik.addToProduktList(produkte1);
+        produkteData.add(produkte1);
+//        grafik.addProduktToMap(produkte1);
+
+        Produkte produkte2 = new Produkte("Produkte2");
+        LinkedHashMap<String, Integer> process2 = new LinkedHashMap<>();
+        process2.put("Maschine4", 2);
+        process2.put("Maschine5", 1);
+        produkte2.setMap(process2);
+        grafik.addToProduktList(produkte2);
+        produkteData.add(produkte2);
+//        grafik.addProduktToMap(produkte2);
+
+
+
+        Produkte produkte3 = new Produkte("Produkte3");
+        LinkedHashMap<String, Integer> process3 = new LinkedHashMap<>();
+        process3.put("Maschine3", 2);
+        produkte3.setMap(process3);
+        grafik.addToProduktList(produkte3);
+        produkteData.add(produkte3);
+//        grafik.addProduktToMap(produkte3);
+
+
+
+        Produkte produkte4 = new Produkte("Produkte4");
+        LinkedHashMap<String, Integer> process4 = new LinkedHashMap<>();
+        process4.put("Maschine1", 2);
+        process4.put("Maschine3", 3);
+        produkte4.setMap(process4);
+        grafik.addToProduktList(produkte4);
+        produkteData.add(produkte4);
+//        grafik.addProduktToMap(produkte4);
+
+
+
+        Produkte produkte5 = new Produkte("Produkte5");
+        LinkedHashMap<String, Integer> process5 = new LinkedHashMap<>();
+        process5.put("Maschine2", 1);
+        process5.put("Maschine5", 3);
+        produkte5.setMap(process5);
+        grafik.addToProduktList(produkte5);
+        produkteData.add(produkte5);
+//        grafik.addProduktToMap(produkte5);
+
+
+        Produkte produkte6 = new Produkte("Produkte6");
+        LinkedHashMap<String, Integer> process6 = new LinkedHashMap<>();
+        process6.put("Maschine3", 1);
+        process6.put("Maschine4", 3);
+        produkte6.setMap(process6);
+        grafik.addToProduktList(produkte6);
+        produkteData.add(produkte6);
+//        grafik.addProduktToMap(produkte6);
     }
 
 
